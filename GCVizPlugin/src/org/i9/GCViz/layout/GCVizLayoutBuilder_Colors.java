@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.i9.GCViz.layout;
 
 import javax.swing.Icon;
@@ -19,11 +15,11 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = LayoutBuilder.class)
 public class GCVizLayoutBuilder_Colors implements LayoutBuilder{
     
-    private TestLayoutUI ui = new TestLayoutUI();
+    private GCVizLayoutUI ui = new GCVizLayoutUI();
     
     @Override
     public String getName() {
-        return "GC-Viz Colors";
+        return "GC-Viz Compare";
     }
 
     @Override
@@ -36,7 +32,7 @@ public class GCVizLayoutBuilder_Colors implements LayoutBuilder{
         return new ChangeColors(this);
     }
             
-    private static class TestLayoutUI implements LayoutUI {
+    private static class GCVizLayoutUI implements LayoutUI {
 
         @Override
         public String getDescription() {

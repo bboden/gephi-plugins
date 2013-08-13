@@ -48,11 +48,7 @@ public class GCVizLayout extends AbstractLayout implements Layout {
     private float c_attraction_clusters;
     private float c_attributes;
     private float l_repulsion_attributes;
-    // evaluation
-    private double eval_longEdges;
-    private double eval_clustering;
-    private double eval_overlap;
-    private double eval_attributes;
+  
 
     public GCVizLayout(LayoutBuilder layoutBuilder) {
         super(layoutBuilder);
@@ -63,11 +59,7 @@ public class GCVizLayout extends AbstractLayout implements Layout {
         graph = graphModel.getGraphVisible();
         setConverged(false);
 
-        eval_longEdges = 0.0;
-        eval_clustering = 0.0;
-        eval_overlap = 0.0;
-        eval_attributes = 0.0;
-
+      
         // read clustering information
         scr = new SubspaceClusteringReader(clusteringFile);
         scr.run();
@@ -340,8 +332,7 @@ public class GCVizLayout extends AbstractLayout implements Layout {
                 longEdges++;
             }
         }
-        this.eval_longEdges = (double) longEdges / edges.length;
-
+    
         // overlap
         int overlappingNodes = 0;
         for (int i = 0; i < nodes.length; i++) {
@@ -352,8 +343,7 @@ public class GCVizLayout extends AbstractLayout implements Layout {
                 }
             }
         }
-        this.eval_overlap = (double) overlappingNodes / nodes.length;
-
+       
         // clustering
         double temp = 0;
         for (Node n1 : nodes) {
@@ -376,8 +366,7 @@ public class GCVizLayout extends AbstractLayout implements Layout {
             temp += distCluster / distOthers;
         }
         temp /= nodes.length;
-        this.eval_clustering = temp;
-
+     
         // attributes
         // compute average dist_res dist_attr factor
         double factor = 0;
@@ -433,137 +422,107 @@ public class GCVizLayout extends AbstractLayout implements Layout {
                 }
             }
         }
-        this.eval_attributes = temp / counter;
-
+       
     }
 
     @Override
     public LayoutProperty[] getProperties() {
         List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
-        final String TESTLAYOUT_GENERAL = NbBundle.getMessage(GCVizLayout.class, "TestLayout.general");
-        final String TESTLAYOUT_FORCES = NbBundle.getMessage(GCVizLayout.class, "TestLayout.forces");
-        final String TESTLAYOUT_EVALOUT = NbBundle.getMessage(GCVizLayout.class, "TestLayout.evalout");
-        try {
+        final String GCVIZLAYOUT_GENERAL = NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.general");
+        final String GCVIZLAYOUT_FORCES = NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.forces");
+            try {
             properties.add(LayoutProperty.createProperty(
                     this, String.class,
-                    NbBundle.getMessage(GCVizLayout.class, "TestLayout.clusteringFile.name"),
-                    TESTLAYOUT_GENERAL,
-                    "TestLayout.clusteringFile.name",
-                    NbBundle.getMessage(GCVizLayout.class, "TestLayout.clusteringFile.desc"),
+                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.clusteringFile.name"),
+                    GCVIZLAYOUT_GENERAL,
+                    "GCVizLayout.clusteringFile.name",
+                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.clusteringFile.desc"),
                     "getClusteringFile", "setClusteringFile"));
                     //"getClusteringFile", "setClusteringFile", PathEditor.class));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
-                    NbBundle.getMessage(GCVizLayout.class, "TestLayout.speed.name"),
-                    TESTLAYOUT_GENERAL,
-                    "TestLayout.speed.name",
-                    NbBundle.getMessage(GCVizLayout.class, "TestLayout.speed.desc"),
+                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.speed.name"),
+                    GCVIZLAYOUT_GENERAL,
+                    "GCVizLayout.speed.name",
+                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.speed.desc"),
                     "getSpeed", "setSpeed"));
-            /*properties.add(LayoutProperty.createProperty(
+            properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.p.name"),
-                    TESTLAYOUT_GENERAL,
+                    GCVIZLAYOUT_GENERAL,
                     "GCVizLayout.p.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.p.desc"),
                     "getP", "setP"));
             properties.add(LayoutProperty.createProperty(
                     this, Boolean.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.pInf.name"),
-                    TESTLAYOUT_GENERAL,
+                    GCVIZLAYOUT_GENERAL,
                     "GCVizLayout.pInf.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.pInf.desc"),
                     "ispInf", "setpInf"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_antiOverlap.name"),
-                    TESTLAYOUT_FORCES,
+                    GCVIZLAYOUT_FORCES,
                     "GCVizLayout.c_antiOverlap.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_antiOverlap.desc"),
                     "getC_antiOverlap", "setC_antiOverlap"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.l_antiOverlap.name"),
-                    TESTLAYOUT_FORCES,
+                    GCVIZLAYOUT_FORCES,
                     "GCVizLayout.l_antiOverlap.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.l_antiOverlap.desc"),
                     "getL_antiOverlap", "setL_antiOverlap"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_repulsion.name"),
-                    TESTLAYOUT_FORCES,
+                    GCVIZLAYOUT_FORCES,
                     "GCVizLayout.c_repulsion.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_repulsion.desc"),
                     "getC_repulsion", "setC_repulsion"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.l_repulsion.name"),
-                    TESTLAYOUT_FORCES,
+                    GCVIZLAYOUT_FORCES,
                     "GCVizLayout.l_repulsion.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.l_repulsion.desc"),
                     "getL_repulsion", "setL_repulsion"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_attraction_edges.name"),
-                    TESTLAYOUT_FORCES,
+                    GCVIZLAYOUT_FORCES,
                     "GCVizLayout.c_attraction_edges.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_attraction_edges.desc"),
                     "getC_attraction_edges", "setC_attraction_edges"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_attraction_clusters.name"),
-                    TESTLAYOUT_FORCES,
+                    GCVIZLAYOUT_FORCES,
                     "GCVizLayout.c_attraction_clusters.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_attraction_clusters.desc"),
                     "getC_attraction_clusters", "setC_attraction_clusters"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_attributes.name"),
-                    TESTLAYOUT_FORCES,
+                    GCVIZLAYOUT_FORCES,
                     "GCVizLayout.c_attributes.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_attributes.desc"),
                     "getC_attributes", "setC_attributes"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.l_repulsion_attributes.name"),
-                    TESTLAYOUT_FORCES,
+                    GCVIZLAYOUT_FORCES,
                     "GCVizLayout.l_repulsion_attributes.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.l_repulsion_attributes.desc"),
                     "getL_repulsion_attributes", "setL_repulsion_attributes"));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.epsilon.name"),
-                    TESTLAYOUT_FORCES,
+                    GCVIZLAYOUT_FORCES,
                     "GCVizLayout.epsilon.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.epsilon.desc"),
-                    "getEpsilon", "setEpsilon"));*/
-        /*    properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.eval_longEdges.name"),
-                    TESTLAYOUT_EVALOUT,
-                    "GCVizLayout.eval_longEdges.name",
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.eval_longEdges.desc"),
-                    "getEval_LongEdges", "setEval_LongEdges"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.eval_Clustering.name"),
-                    TESTLAYOUT_EVALOUT,
-                    "GCVizLayout.eval_Clustering.name",
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.eval_Clustering.desc"),
-                    "getEval_Clustering", "setEval_Clustering"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.eval_Overlap.name"),
-                    TESTLAYOUT_EVALOUT,
-                    "GCVizLayout.eval_Overlap.name",
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.eval_Overlap.desc"),
-                    "getEval_Overlap", "setEval_Overlap"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.eval_Attributes.name"),
-                    TESTLAYOUT_EVALOUT,
-                    "GCVizLayout.eval_Attributes.name",
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.eval_Attributes.desc"),
-                    "getEval_Attributes", "setEval_Attributes"));*/
+                    "getEpsilon", "setEpsilon"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -673,58 +632,9 @@ public class GCVizLayout extends AbstractLayout implements Layout {
     public void setL_repulsion_attributes(Float l_repulsion_attributes) {
         this.l_repulsion_attributes = l_repulsion_attributes;
     }
-
-    public double getEval_LongEdges() {
-        return this.eval_longEdges;
-    }
-
-    public void setEval_LongEdges(Double x) {
-        this.eval_longEdges = x;
-    }
-
-    public double getEval_Clustering() {
-        return this.eval_clustering;
-    }
-
-    public void setEval_Clustering(Double x) {
-        this.eval_clustering = x;
-    }
-
-    public double getEval_Overlap() {
-        return this.eval_overlap;
-    }
-
-    public void setEval_Overlap(Double x) {
-        this.eval_overlap = x;
-    }
-
-    public double getEval_Attributes() {
-        return this.eval_attributes;
-    }
-
-    public void setEval_Attributes(Double x) {
-        this.eval_attributes = x;
-    }
-
     @Override
     public void resetPropertiesValues() {
-        //clusteringFile = "T:/users/haag/Bachelorarbeit/Graphen/Graph1.true";
-        //clusteringFile = "T:/users/haag/Bachelorarbeit/Graphen/beispiel_dichtebasiert0.true";
-        //clusteringFile = "T:/users/haag/Bachelorarbeit/Graphen/beispiel_dichtebasiert_geringeDichte.true";
-        //clusteringFile = "T:/users/haag/Bachelorarbeit/Graphen/beispiel_beispiel_dichtebasiert_kleineCluster.true";
-        //clusteringFile = "T:/users/haag/Bachelorarbeit/Graphen/beispiel_dichtebasiert_mitUeberlappung.true";
-        //clusteringFile = "T:/users/haag/Bachelorarbeit/Graphen/beispiel_dichtebasiert_grosserGraph.true";
-        //clusteringFile = "T:/users/haag/Bachelorarbeit/Graphen/beispiel_gamer.true";        
-        //clusteringFile = "T:/users/haag/Bachelorarbeit/Graphen/beispiel_dichtebasiert_vielNoise.true";
-        //clusteringFile = "T:/users/haag/Bachelorarbeit/Graphen/beispiel_dichtebasiert_vielNoise2.true";
-        
-        //clusteringFile = "C:/Users/Roman/Desktop/Bachelorarbeit/Graphen/Graph1.true";
-        //clusteringFile = "C:/Users/Roman/Desktop/Bachelorarbeit/Graphen/beispiel_dichtebasiert0.true";
-        //clusteringFile = "C:/Users/Roman/Desktop/Bachelorarbeit/Graphen/beispiel_dichtebasiert_kleineCluster.true";
-        //clusteringFile = "C:/Users/Roman/Desktop/Bachelorarbeit/Graphen/beispiel_dichtebasiert_mitUeberlappung.true";
-        //clusteringFile = "C:/Users/Roman/Desktop/Bachelorarbeit/Graphen/Graph1.true";
-        //clusteringFile = "C:/Users/Roman/Desktop/Bachelorarbeit/Graphen/beispiel_gamer.true";
-
+       
         clusteringFile = "D:/test.found";
         
         speed = 1.0;
@@ -740,10 +650,6 @@ public class GCVizLayout extends AbstractLayout implements Layout {
         c_attributes = 0.002f;
         l_repulsion_attributes = 20f;
         epsilon = 0.1;
-
-        //eval_longEdges = 0.0;
-        //eval_clustering = 0.0;
-        //eval_overlap = 0.0;
-        //eval_attributes = 0.0;
+        
     }
 }

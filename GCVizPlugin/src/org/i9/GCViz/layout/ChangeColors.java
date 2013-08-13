@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.i9.GCViz.layout;
 
 import java.util.ArrayList;
@@ -86,14 +82,14 @@ public class ChangeColors extends AbstractLayout implements Layout {
     @Override
     public LayoutProperty[] getProperties() {
         List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
-        final String TESTLAYOUT = "ChangeColors";
+        final String GCVIZLAYOUT = "ChangeColors";
         try {
             properties.add(LayoutProperty.createProperty(
                     this, String.class,
-                    NbBundle.getMessage(ChangeColors.class, "TestLayout.clusteringFile.name"),
-                    TESTLAYOUT,
+                    NbBundle.getMessage(ChangeColors.class, "GCVizLayout.clusteringFile.name"),
+                    GCVIZLAYOUT,
                     "TestLayout.clusteringFile.name",
-                    NbBundle.getMessage(ChangeColors.class, "TestLayout.clusteringFile.desc"),
+                    NbBundle.getMessage(ChangeColors.class, "GCVizLayout.clusteringFile.desc"),
                     "getClusteringFile", "setClusteringFile"));
           
         } catch (Exception e) {
