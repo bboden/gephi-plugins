@@ -14,6 +14,7 @@ import org.gephi.layout.spi.LayoutProperty;
 import org.gephi.layout.plugin.AbstractLayout;
 import org.openide.util.NbBundle;
 import org.i9.GCViz.utils.*;
+import java.io.File;
 
 /**
  *
@@ -22,7 +23,7 @@ import org.i9.GCViz.utils.*;
 public class ChangeColors extends AbstractLayout implements Layout {
 
     private Graph graph;
-    private String clusteringFile;
+    private File clusteringFile;
     private SubspaceClusteringReader scr;
    
     public ChangeColors(LayoutBuilder layoutBuilder) {
@@ -33,7 +34,7 @@ public class ChangeColors extends AbstractLayout implements Layout {
     public void initAlgo() {
         graph = graphModel.getGraphVisible();
         setConverged(false);
-        scr = new SubspaceClusteringReader(clusteringFile);
+        scr = new SubspaceClusteringReader(clusteringFile.getAbsolutePath());
         scr.run();
         Colors colors = new Colors(scr.getClusterCount());
         Node[] nodes = graph.getNodes().toArray();
@@ -85,10 +86,10 @@ public class ChangeColors extends AbstractLayout implements Layout {
         final String GCVIZLAYOUT = "ChangeColors";
         try {
             properties.add(LayoutProperty.createProperty(
-                    this, String.class,
+                    this, File.class,
                     NbBundle.getMessage(ChangeColors.class, "GCVizLayout.clusteringFile.name"),
                     GCVIZLAYOUT,
-                    "TestLayout.clusteringFile.name",
+                    "GCVizLayout.clusteringFile.name",
                     NbBundle.getMessage(ChangeColors.class, "GCVizLayout.clusteringFile.desc"),
                     "getClusteringFile", "setClusteringFile"));
           
@@ -100,11 +101,11 @@ public class ChangeColors extends AbstractLayout implements Layout {
         return properties.toArray(new LayoutProperty[0]);
     }
 
-    public String getClusteringFile() {
+    public File getClusteringFile() {
         return clusteringFile;
     }
 
-    public void setClusteringFile(String file) {
+    public void setClusteringFile(File file) {
         this.clusteringFile = file;
     }
     
@@ -112,7 +113,7 @@ public class ChangeColors extends AbstractLayout implements Layout {
 
    @Override
     public void resetPropertiesValues() {
-        clusteringFile = "C:\\Users\\boden\\example_graph.true";
+        clusteringFile = new File("D:\\test.found");
         
     }
 }

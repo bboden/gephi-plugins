@@ -22,6 +22,8 @@ import org.gephi.layout.api.LayoutModel;
 import org.gephi.layout.api.LayoutController;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
+import org.i9.GCViz.layout.GCVizLayout;
+import java.io.File;
 
 
 
@@ -149,33 +151,34 @@ public final class CombinedClusteringTopComponent extends TopComponent {
                 path = gamer.getPath();
                 gamer.getCombinedClustering().execute(model, algorithm, path); 
             }
-        /*    LayoutModel activeLayoutModel = model.getWorkspace().getLookup().lookup(LayoutModel.class);     
-            LayoutController activeLayoutController = model.getWorkspace().getLookup().lookup(LayoutController.class);   
-            LayoutBuilder myLayoutBuilder = new org.gephi.layout.plugin.fruchterman.FruchtermanReingoldBuilder();
-            activeLayoutController.setLayout(new org.gephi.layout.plugin.fruchterman.FruchtermanReingold(myLayoutBuilder));*/
             
-            JOptionPane.showMessageDialog(null, "successful");
+           
+            
+            LayoutBuilder myLayoutBuilder = new org.i9.GCViz.layout.GCVizLayoutBuilder();
+            LayoutController activeLayoutController = Lookup.getDefault().lookup(LayoutController.class);
+            GCVizLayout myLayout = new GCVizLayout(myLayoutBuilder);
+            myLayout.resetPropertiesValues();
+            myLayout.setClusteringFile(new File(path));
+            double epsilon=0.1;
+            if(algorithm.equals("DB-CSC")){
+                epsilon = dbgraph.getCombinedClustering().getEpsilon();
+            } else if (algorithm.equals("GAMer")){
+                epsilon = gamer.getCombinedClustering().getW_max();
+            }
+            myLayout.setEpsilon(epsilon);
+            activeLayoutController.setLayout(myLayout);
+            activeLayoutController.executeLayout();
+            
+           //JOptionPane.showMessageDialog(null, "successful");
          }
-            //mainCombinedClustering.main("dbgraph","");
-            /*if (!model.isRunning()) {
-            Clusterer clusterer = model.getSelectedClusterer();
-            ClusteringController controller = Lookup.getDefault().lookup(ClusteringController.class);
-            controller.clusterize(clusterer);
-             } else {
-            //stop
-            Clusterer clusterer = model.getSelectedClusterer();
-            ClusteringController controller = Lookup.getDefault().lookup(ClusteringController.class);
-            controller.cancelClusterize(clusterer);
-             }*/            
+             
     }
 
 
     private void settings() {
         
-        CombinedClusteringBuilder builder = new CombinedClusteringBuilder();//(CombinedClusteringBuilder) algorithmComboBox.getSelectedItem();
-        //CombinedClusteringUI clustererUI = builder.getUI();
-        //JPanel panel = clustererUI.getPanel();
-        //clustererUI.setup(model.getSelectedClusterer());
+        CombinedClusteringBuilder builder = new CombinedClusteringBuilder();
+        
         DialogDescriptor dd = new DialogDescriptor(dbgraph,builder.getDBGraphName());
         DialogDescriptor d = new DialogDescriptor(gamer,builder.getGamerName());
         String algorithm = (String)algorithmComboBox.getSelectedItem();
@@ -211,30 +214,7 @@ public final class CombinedClusteringTopComponent extends TopComponent {
     private javax.swing.JButton settingButton;
     // End of variables declaration//GEN-END:variables
     
-    /* public String getGamerName() {
-        return "Gamer";
-    }
-    
-    public String getDBGraphName() {
-        return "DBGraph";
-    }
-    //CombinedClusteringTopComponent obj;
-    private static class AlgorithmListCellRenderer extends DefaultListCellRenderer {
-        
-        CombinedClusteringTopComponent obj = new CombinedClusteringTopComponent();
-        @Override
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if (value instanceof ClustererBuilder) {
-                ClustererBuilder builder = (ClustererBuilder) value;
-                setText(obj.getGamerName());
-                setText(builder.getName());
-            } else {
-                setText((String) value);
-            }
-            return this;
-        }
-    }*/
+   
     
     @Override
     public void componentOpened() {

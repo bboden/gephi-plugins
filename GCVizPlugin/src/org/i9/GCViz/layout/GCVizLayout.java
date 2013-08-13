@@ -17,6 +17,7 @@ import org.gephi.layout.plugin.AbstractLayout;
 import org.openide.util.NbBundle;
 import org.i9.GCViz.utils.*;
 import org.i9.GCViz.utils.forces.*;
+import java.io.File;
 
 /**
  *
@@ -25,7 +26,7 @@ import org.i9.GCViz.utils.forces.*;
 public class GCVizLayout extends AbstractLayout implements Layout {
 
     private Graph graph;
-    private String clusteringFile;
+    private File clusteringFile;
     private SubspaceClusteringReader scr;
     private double speed;
     private double p;
@@ -61,7 +62,7 @@ public class GCVizLayout extends AbstractLayout implements Layout {
 
       
         // read clustering information
-        scr = new SubspaceClusteringReader(clusteringFile);
+        scr = new SubspaceClusteringReader(clusteringFile.getAbsolutePath());
         scr.run();
 
         // Colors
@@ -432,13 +433,13 @@ public class GCVizLayout extends AbstractLayout implements Layout {
         final String GCVIZLAYOUT_FORCES = NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.forces");
             try {
             properties.add(LayoutProperty.createProperty(
-                    this, String.class,
+                    this, java.io.File.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.clusteringFile.name"),
                     GCVIZLAYOUT_GENERAL,
                     "GCVizLayout.clusteringFile.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.clusteringFile.desc"),
                     "getClusteringFile", "setClusteringFile"));
-                    //"getClusteringFile", "setClusteringFile", PathEditor.class));
+                   // "getClusteringFile", "setClusteringFile", PathEditor.class));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.speed.name"),
@@ -529,11 +530,11 @@ public class GCVizLayout extends AbstractLayout implements Layout {
         return properties.toArray(new LayoutProperty[0]);
     }
 
-    public String getClusteringFile() {
+    public File getClusteringFile() {
         return this.clusteringFile;
     }
 
-    public void setClusteringFile(String file) {
+    public void setClusteringFile(File file) {
         this.clusteringFile = file;
     }
 
@@ -635,7 +636,7 @@ public class GCVizLayout extends AbstractLayout implements Layout {
     @Override
     public void resetPropertiesValues() {
        
-        clusteringFile = "D:/test.found";
+        clusteringFile = new File("D:/test.found");
         
         speed = 1.0;
         pInf = true;
