@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Roman Haag
@@ -40,7 +42,9 @@ public class SubspaceClusteringReader {
         try {
             fr = new FileReader(inputFilePath);
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+           // ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Clustering File does not exist");
+            return;
         }
 
         BufferedReader br = new BufferedReader(fr);
@@ -49,7 +53,8 @@ public class SubspaceClusteringReader {
             try {
                 line = br.readLine();
             } catch (IOException ex) {
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Clustering File could not be read");
+                return;
             }
             if (line == null) {
                 break;

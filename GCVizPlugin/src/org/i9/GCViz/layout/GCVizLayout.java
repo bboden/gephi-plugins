@@ -12,7 +12,7 @@ import org.gephi.graph.api.Node;
 import org.gephi.graph.api.NodeData;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
-import org.gephi.layout.spi.LayoutProperty;
+import org.gephi.layout.spi.LayoutProperty; 
 import org.gephi.layout.plugin.AbstractLayout;
 import org.openide.util.NbBundle;
 import org.i9.GCViz.utils.*;
@@ -24,7 +24,7 @@ import java.io.File;
  * @author Roman Haag
  */
 public class GCVizLayout extends AbstractLayout implements Layout {
-
+    
     private Graph graph;
     private File clusteringFile;
     private SubspaceClusteringReader scr;
@@ -64,7 +64,8 @@ public class GCVizLayout extends AbstractLayout implements Layout {
         // read clustering information
         scr = new SubspaceClusteringReader(clusteringFile.getAbsolutePath());
         scr.run();
-
+        
+        
         // Colors
         Colors colors = new Colors(scr.getClusterCount());
         Node[] nodes = graph.getNodes().toArray();

@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import org.gephi.data.attributes.api.AttributeRow;
 import org.gephi.layout.api.LayoutModel;
 import org.gephi.layout.api.LayoutController;
+import org.gephi.layout.spi.LayoutUI;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.i9.GCViz.layout.GCVizLayout;
@@ -134,6 +135,11 @@ public final class CombinedClusteringTopComponent extends TopComponent {
     }// </editor-fold>//GEN-END:initComponents
 
     private void run() {
+        
+         LayoutBuilder myLayoutBuilder = new org.i9.GCViz.layout.GCVizLayoutBuilder();
+         LayoutController activeLayoutController = Lookup.getDefault().lookup(LayoutController.class);
+          activeLayoutController.stopLayout();
+     
           
          Object selectedItem = algorithmComboBox.getSelectedItem();
          String path = "";
@@ -154,22 +160,30 @@ public final class CombinedClusteringTopComponent extends TopComponent {
             
            
             
-            LayoutBuilder myLayoutBuilder = new org.i9.GCViz.layout.GCVizLayoutBuilder();
-            LayoutController activeLayoutController = Lookup.getDefault().lookup(LayoutController.class);
+           
             GCVizLayout myLayout = new GCVizLayout(myLayoutBuilder);
+            activeLayoutController.setLayout(myLayout);
+            activeLayoutController.getModel().getSelectedLayout().resetPropertiesValues();
+            
             myLayout.resetPropertiesValues();
             myLayout.setClusteringFile(new File(path));
+            
+            
             double epsilon=0.1;
             if(algorithm.equals("DB-CSC")){
                 epsilon = dbgraph.getCombinedClustering().getEpsilon();
+                myLayout.setpInf(Boolean.TRUE);
             } else if (algorithm.equals("GAMer")){
                 epsilon = gamer.getCombinedClustering().getW_max();
+                myLayout.setpInf(Boolean.FALSE);
+                myLayout.setP(2.0);
             }
             myLayout.setEpsilon(epsilon);
-            activeLayoutController.setLayout(myLayout);
-            activeLayoutController.executeLayout();
+           
             
-           //JOptionPane.showMessageDialog(null, "successful");
+            
+            activeLayoutController.executeLayout();
+               
          }
              
     }

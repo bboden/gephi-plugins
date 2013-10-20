@@ -17,7 +17,7 @@ public class GamerSettingPanel extends javax.swing.JPanel {
         param_r.setText("" + combinedClustering.getR_obj());
         param_s.setText("" + combinedClustering.getR_dim());
         w_max.setText("" + combinedClustering.getW_max());
-        
+        path.setText("D:\\gamer.found");
     }
 
     public void setup() {

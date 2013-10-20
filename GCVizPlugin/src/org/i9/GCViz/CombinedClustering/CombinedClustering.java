@@ -94,18 +94,14 @@ public class CombinedClustering {
 
         gephi_graph.readUnlock();
 
-      
+        Progress.finish(progressTicket);
 
         if (cancelled) {
             return;
-        }
+       }
+ 
 
-   
-
-        if (cancelled) {
-            return;
-        }
-     Progress.finish(progressTicket);
+     
     }
 
     public Cluster[] getClusters() {

@@ -13,6 +13,7 @@ public class DBGraphSettingPanel extends javax.swing.JPanel {
         r_dim.setText("" + combinedClustering.getR_dim());
         r_obj.setText("" + combinedClustering.getR_obj());
         s_min.setText("" + combinedClustering.getS_min());
+        path.setText("D:\\dbcsc.found");
     }
 
     public void setup() {
