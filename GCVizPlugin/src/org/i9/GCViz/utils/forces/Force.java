@@ -4,10 +4,7 @@ import org.gephi.graph.api.Node;
 import org.gephi.graph.api.NodeData;
 import org.i9.GCViz.utils.CustomLayoutData;
 
-/**
- *
- * @author Roman
- */
+
 public abstract class Force {
     
     float c = 1;

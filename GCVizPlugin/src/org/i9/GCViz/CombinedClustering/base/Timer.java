@@ -12,6 +12,7 @@ public class Timer {
 	
 	private boolean mCounting;
 
+	
 	public Timer() {
 		mCounting = false;
 	}
@@ -33,11 +34,11 @@ public class Timer {
 		return mCounter;
 	}
 
+	@Override
 	public String toString() {
 		long time = stop();
-		
 		long msecs = time;
-		return "time: "/* + std + ":" + mins + ":" + secs + "." */+ msecs;
+		return "time: "+ msecs;
 	}
 
 	

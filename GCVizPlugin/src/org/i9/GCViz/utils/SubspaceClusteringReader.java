@@ -13,10 +13,6 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Roman Haag
- */
 public class SubspaceClusteringReader {
 
     private String inputFilePath;
@@ -42,8 +38,7 @@ public class SubspaceClusteringReader {
         try {
             fr = new FileReader(inputFilePath);
         } catch (FileNotFoundException ex) {
-           // ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Clustering File does not exist");
+             JOptionPane.showMessageDialog(null, "Clustering File does not exist");
             return;
         }
 

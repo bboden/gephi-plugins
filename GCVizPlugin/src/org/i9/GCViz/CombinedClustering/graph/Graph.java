@@ -37,7 +37,7 @@ public class Graph {
     public Node getNodeHavingID(int ID) {
         for (Node node : nodes) {
             if (node.getID() == ID) {
-//                System.out.println("Node" + node);
+
                 return node;
             }
         }
@@ -405,22 +405,5 @@ public class Graph {
         Collections.sort(nodes);
     }
     
-    public String outputAsMatrix(){
-        String matrix="";
-        
-        for (Node node1 : this.nodes){
-            for (Node node2 : this.nodes){
-            
-                if(node1.getNeighbors().contains(node2)){
-                    matrix+="1 ";
-                } else {
-                    matrix+="0 ";
-                }
-            }
-            matrix+="\n";
-        }
-        
-        return matrix;
-    }
     
   }

@@ -15,16 +15,11 @@ import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 import org.gephi.graph.api.GraphModel;
 import org.openide.util.Lookup;
-import java.util.Iterator;
-import javax.swing.JOptionPane;
-import org.gephi.data.attributes.api.AttributeRow;
-import org.gephi.layout.api.LayoutModel;
 import org.gephi.layout.api.LayoutController;
-import org.gephi.layout.spi.LayoutUI;
-import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.i9.GCViz.layout.GCVizLayout;
 import java.io.File;
+
 
 
 

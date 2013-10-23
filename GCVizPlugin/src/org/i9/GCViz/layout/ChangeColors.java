@@ -2,12 +2,8 @@ package org.i9.GCViz.layout;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.gephi.data.attributes.api.AttributeRow;
-import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.Graph;
-import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
-import org.gephi.graph.api.NodeData;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutProperty;
@@ -16,10 +12,7 @@ import org.openide.util.NbBundle;
 import org.i9.GCViz.utils.*;
 import java.io.File;
 
-/**
- *
- * @author Roman
- */
+
 public class ChangeColors extends AbstractLayout implements Layout {
 
     private Graph graph;
@@ -60,20 +53,7 @@ public class ChangeColors extends AbstractLayout implements Layout {
     @Override
     public void goAlgo() {
         graph = graphModel.getGraphVisible();
-       /* Node[] nodes = graph.getNodes().toArray();
-        Edge[] edges = graph.getEdges().toArray();
-
-        // reset dx and dy
-        for (Node n : nodes) {
-            if (n.getNodeData().getLayoutData() == null || !(n.getNodeData().getLayoutData() instanceof CustomLayoutData)) {
-                n.getNodeData().setLayoutData(new CustomLayoutData());
-            }
-            CustomLayoutData layoutData = n.getNodeData().getLayoutData();
-            layoutData.dx = 0;
-            layoutData.dy = 0;
-        }*/
-       
-   
+         
     }
 
     @Override
@@ -83,7 +63,7 @@ public class ChangeColors extends AbstractLayout implements Layout {
     @Override
     public LayoutProperty[] getProperties() {
         List<LayoutProperty> properties = new ArrayList<LayoutProperty>();
-        final String GCVIZLAYOUT = "ChangeColors";
+        final String GCVIZLAYOUT = "GCViz Compare";
         try {
             properties.add(LayoutProperty.createProperty(
                     this, File.class,

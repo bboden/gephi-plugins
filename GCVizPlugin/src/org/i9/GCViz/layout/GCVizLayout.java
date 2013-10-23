@@ -19,10 +19,7 @@ import org.i9.GCViz.utils.*;
 import org.i9.GCViz.utils.forces.*;
 import java.io.File;
 
-/**
- *
- * @author Roman Haag
- */
+
 public class GCVizLayout extends AbstractLayout implements Layout {
     
     private Graph graph;
@@ -464,20 +461,6 @@ public class GCVizLayout extends AbstractLayout implements Layout {
                     "ispInf", "setpInf"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class,
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_antiOverlap.name"),
-                    GCVIZLAYOUT_FORCES,
-                    "GCVizLayout.c_antiOverlap.name",
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_antiOverlap.desc"),
-                    "getC_antiOverlap", "setC_antiOverlap"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Float.class,
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.l_antiOverlap.name"),
-                    GCVIZLAYOUT_FORCES,
-                    "GCVizLayout.l_antiOverlap.name",
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.l_antiOverlap.desc"),
-                    "getL_antiOverlap", "setL_antiOverlap"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Float.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_repulsion.name"),
                     GCVIZLAYOUT_FORCES,
                     "GCVizLayout.c_repulsion.name",
@@ -497,13 +480,6 @@ public class GCVizLayout extends AbstractLayout implements Layout {
                     "GCVizLayout.c_attraction_edges.name",
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_attraction_edges.desc"),
                     "getC_attraction_edges", "setC_attraction_edges"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Float.class,
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_attraction_clusters.name"),
-                    GCVIZLAYOUT_FORCES,
-                    "GCVizLayout.c_attraction_clusters.name",
-                    NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_attraction_clusters.desc"),
-                    "getC_attraction_clusters", "setC_attraction_clusters"));
             properties.add(LayoutProperty.createProperty(
                     this, Float.class,
                     NbBundle.getMessage(GCVizLayout.class, "GCVizLayout.c_attributes.name"),

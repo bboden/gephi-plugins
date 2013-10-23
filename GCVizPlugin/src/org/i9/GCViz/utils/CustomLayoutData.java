@@ -2,10 +2,7 @@ package org.i9.GCViz.utils;
 
 import org.gephi.graph.spi.LayoutData;
 
-/**
- *
- * @author Roman Haag
- */
+
 public class CustomLayoutData implements LayoutData{
     
     public enum nodeType {

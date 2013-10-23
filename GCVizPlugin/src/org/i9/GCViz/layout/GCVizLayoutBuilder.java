@@ -5,11 +5,6 @@ import javax.swing.JPanel;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutUI;
-
-/**
- *
- * @author Roman
- */
 import org.openide.util.lookup.ServiceProvider;
  
 @ServiceProvider(service = LayoutBuilder.class)

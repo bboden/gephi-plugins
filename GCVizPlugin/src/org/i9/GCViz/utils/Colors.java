@@ -2,10 +2,7 @@ package org.i9.GCViz.utils;
 
 import java.util.Random;
 
-/**
- *
- * @author Roman Haag
- */
+
 public class Colors {
     Random generator;
     

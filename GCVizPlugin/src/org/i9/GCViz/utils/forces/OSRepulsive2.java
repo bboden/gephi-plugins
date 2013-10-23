@@ -1,11 +1,8 @@
 package org.i9.GCViz.utils.forces;
 
-import org.gephi.graph.api.Node;
 
-/**
- *
- * @author Roman
- */
+
+
 public class OSRepulsive2 extends Force {
     private float l = 20;
     

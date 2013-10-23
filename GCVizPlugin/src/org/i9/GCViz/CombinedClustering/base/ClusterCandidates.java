@@ -1,7 +1,6 @@
 package org.i9.GCViz.CombinedClustering.base;
 
 import org.i9.GCViz.CombinedClustering.graph.Node;
-import java.text.DecimalFormat;
 
 import java.util.HashSet;
 
