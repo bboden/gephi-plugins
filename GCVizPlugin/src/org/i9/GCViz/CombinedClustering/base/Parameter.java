@@ -2,13 +2,13 @@ package org.i9.GCViz.CombinedClustering.base;
 
 public class Parameter {
 
-    public static int n_min=4;
-    public static double gamma_min=0.5;
+    public static int n_min=6;
+    public static double gamma_min=0.6;
     public static int s_min=2;
     public static double w_max=1;
     public static int k=2;
     public static double epsilon=1;
-    public static int min_pts=4;
+    public static int min_pts=5;
     public static int numberOfAtts; //Read from the graph file
     
     public static double param_a=1; 	//density

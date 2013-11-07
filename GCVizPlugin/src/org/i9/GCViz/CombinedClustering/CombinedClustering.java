@@ -11,7 +11,7 @@ import org.i9.GCViz.CombinedClustering.algorithms.DBCSC;
 import org.i9.GCViz.CombinedClustering.algorithms.GAMER;
 import org.apache.commons.collections15.map.FastHashMap;
 import org.gephi.data.attributes.api.AttributeRow;
-
+import javax.swing.JOptionPane;
 
 public class CombinedClustering {
      
@@ -59,7 +59,12 @@ public class CombinedClustering {
                 if(value_obj==null){
                     atts[i]=Double.NaN;
                 } else {
-                    atts[i]=Double.parseDouble(value_obj.toString());
+                    try{
+                        atts[i]=Double.parseDouble(value_obj.toString());
+                    } catch(NumberFormatException e){
+                        JOptionPane.showMessageDialog(null, "Input graph contains non-numeric attribute values. This implementation of GAMer and DB-CSC only supports numeric attributes.");
+                        return;
+                    }
                 }
             }
             org.i9.GCViz.CombinedClustering.graph.Node new_node = new org.i9.GCViz.CombinedClustering.graph.Node(id, atts);

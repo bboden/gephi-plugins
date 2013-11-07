@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 OpenIDE-Module: org.i9.GCViz
 OpenIDE-Module-Name: GCViz
 OpenIDE-Module-Localizing-Bundle: org/i9/GCViz/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.0
+OpenIDE-Module-Specification-Version: 1.1
 
